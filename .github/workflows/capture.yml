@@ -1,0 +1,30 @@
+name: Netatmo Hourly Capture
+
+on:
+  schedule:
+    # Minute 59 de chaque heure, heure locale Europe/Paris
+    - cron: '59 * * * *'
+  workflow_dispatch:  # Permet de lancer manuellement
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Paris
+    steps:
+      # Récupérer le repo
+      - uses: actions/checkout@v4
+
+      # Installer Node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Installer dépendances
+      - run: npm install
+
+      # Installer Playwright (Chromium)
+      - run: npx playwright install --with-deps
+
+      # Lancer le script
+      - run: node capture.js

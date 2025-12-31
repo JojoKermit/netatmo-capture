@@ -1,0 +1,16 @@
+# Secrets
+.env
+*.env
+*.env.txt
+
+# Google credentials
+client_secret_*.json
+
+# Tests & scripts temporaires
+test_*.js
+get-refresh-token*.js
+*_old.js
+
+# Node
+node_modules/
+

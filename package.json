@@ -1,0 +1,14 @@
+{
+  "name": "netatmo-capture",
+  "version": "1.0.0",
+  "description": "Capture Netatmo et envoi par email",
+  "main": "capture.js",
+  "scripts": {
+    "start": "node capture.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "nodemailer": "^7.0.12",
+    "playwright": "^1.57.0"
+  }
+}

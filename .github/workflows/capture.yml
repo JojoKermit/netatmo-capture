@@ -1,30 +1,34 @@
-name: Netatmo Hourly Capture
+name: Netatmo Capture Email
 
 on:
   schedule:
-    # Minute 59 de chaque heure, heure locale Europe/Paris
-    - cron: '59 * * * *'
-  workflow_dispatch:  # Permet de lancer manuellement
+    - cron: '59 * * * *'   # H - 1 minute (UTC)
+  workflow_dispatch:
 
 jobs:
   capture:
     runs-on: ubuntu-latest
+
     env:
       TZ: Europe/Paris
+      EMAIL_USER: ${{ secrets.EMAIL_USER }}
+      EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
     steps:
-      # Récupérer le repo
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      # Installer Node.js
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
 
-      # Installer dépendances
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
 
-      # Installer Playwright (Chromium)
-      - run: npx playwright install --with-deps
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
 
-      # Lancer le script
-      - run: node capture.js
+      - name: Run capture + email
+        run: node envoi_mail.js

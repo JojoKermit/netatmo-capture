@@ -1,16 +1,40 @@
-# Secrets
+# --- SÉCURITÉ / SECRETS ---
 .env
 *.env
 *.env.txt
-
-# Google credentials
+# Clés Google et credentials
 client_secret_*.json
+*.pem
+*.key
 
-# Tests & scripts temporaires
-test_*.js
-get-refresh-token*.js
-*_old.js
-
-# Node
+# --- NODE.JS ---
 node_modules/
+npm-debug.log*
+package-lock.json
+# On garde package.json mais on ignore les logs d'erreur
+yarn-error.log*
 
+# --- PLAYWRIGHT / BROWSERS ---
+# Playwright télécharge ses propres navigateurs, ne pas les uploader
+.auth/
+test-results/
+playwright-report/
+blob-report/
+playwright/.local-browsers
+
+# --- FICHIERS GÉNÉRÉS (OUTPUT) ---
+# Ignore toutes les captures d'écran pour ne pas saturer l'historique Git
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# --- TESTS & SCRIPTS TEMPORAIRES ---
+test_*.js
+*_old.js
+# Si tu veux garder test-drive.js sur ton PC sans l'envoyer sur GitHub :
+test-drive.js
+
+# --- SYSTÈME ---
+.DS_Store
+Thumbs.db

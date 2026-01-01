@@ -2,7 +2,8 @@ name: Netatmo Capture Email
 
 on:
   schedule:
-    - cron: '59 * * * *'   # H - 1 minute (UTC)
+    # Changé de 59 à 42 pour éviter les pics de charge et réduire le retard de GitHub
+    - cron: '42 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -22,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22 # Version stable recommandée
 
       - name: Install dependencies
         run: npm install
